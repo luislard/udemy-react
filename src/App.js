@@ -50,6 +50,7 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    // prefered way to toggle persons
     let persons = null;
 
     if (this.state.showPersons) {
