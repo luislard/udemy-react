@@ -24,7 +24,10 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    
+    // const persons = this.state.persons; // this causes a flaw because we are pointing to the original state
+    // const persons = this.state.persons.slice(); // this is a better solution because it copies the original state array
+    const persons = [...this.state.persons]; // this is almost the same as before but with more modern syntax
     persons.splice(personIndex, 1); 
     this.setState({persons: persons});
   }
