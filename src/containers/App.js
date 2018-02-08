@@ -21,17 +21,11 @@ class App extends Component {
       return p.id === id;
     });
 
-    // const person = this.state.persons[personIndex]; // this is not desirable since we are pointing to the original state
-    
-    // another approach is
-    // const person = Object.assign({},this.state.persons[personIndex]); // this is another good alternative
-    
-    // this is the most modern approach to copy the object is using the spread operator "..."
     const person = {
       ...this.state.persons[personIndex]
     };
 
-    person.name = event.target.value; // here we update the name in de person copy, not the original state wich is good!
+    person.name = event.target.value;
 
     const persons = [...this.state.persons];
 
@@ -42,9 +36,7 @@ class App extends Component {
 
   deletePersonHandler = (personIndex) => {
     
-    // const persons = this.state.persons; // this causes a flaw because we are pointing to the original state
-    // const persons = this.state.persons.slice(); // this is a better solution because it copies the original state array
-    const persons = [...this.state.persons]; // this is almost the same as before but with more modern syntax
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1); 
     this.setState({persons: persons});
   }
@@ -55,7 +47,6 @@ class App extends Component {
   }
 
   render() {
-    // prefered way to toggle persons
     let persons = null;
 
     if (this.state.showPersons) {
@@ -68,14 +59,13 @@ class App extends Component {
     return (
       <div className={classes.App}>
       <Cockpit 
+        title={this.props.title}
         showPersons={this.state.showPersons} 
         persons={this.state.persons}
         clicked={this.tooglePersonsHandler} />
         {persons}
       </div>
     );
-    // return React.createElement('div', null, 'h1', 'Hi, I am a React Luis!!!');
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1',null,'LUISSSS'));
   }
 }
 
