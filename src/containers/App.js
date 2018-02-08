@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import classes from './App.css';
 
-import Person from '../components/Persons/Person/Person';
+import classes from './App.css';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -57,43 +58,19 @@ class App extends Component {
     // prefered way to toggle persons
     let persons = null;
 
-    let btnClass = '';
-
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person 
-                click={this.deletePersonHandler.bind(this, index)}
-                name={person.name}
-                age={person.age} 
-                key={person.id}
-                changed={(event) => this.nameChangedHandler(event, person.id)} />
-          })}
-        </div>
-      );
-
-      btnClass = classes.Red; // notice that this class Red is in the App.css pointing to an specific element but can be accesed in the global scope
-      
+      persons = <Persons 
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler} />;
     }
-
-    let assignedClasses = [];
-
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red); 
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold); 
-    }
-    
 
     return (
       <div className={classes.App}>
-        <h1>Hi, This is a test</h1>
-        <p className={assignedClasses.join(' ')}>This is really working!</p>
-        <button 
-          className={btnClass}
-          onClick={this.tooglePersonsHandler}>Switch Name</button>
+      <Cockpit 
+        showPersons={this.state.showPersons} 
+        persons={this.state.persons}
+        clicked={this.tooglePersonsHandler} />
         {persons}
       </div>
     );
