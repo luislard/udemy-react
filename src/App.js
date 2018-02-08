@@ -54,19 +54,10 @@ class App extends Component {
   }
 
   render() {
-
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-      
-    }
-
     // prefered way to toggle persons
     let persons = null;
+
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -82,7 +73,7 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
+      btnClass = classes.Red; // notice that this class Red is in the App.css pointing to an specific element but can be accesed in the global scope
       
     }
 
@@ -101,7 +92,7 @@ class App extends Component {
         <h1>Hi, This is a test</h1>
         <p className={assignedClasses.join(' ')}>This is really working!</p>
         <button 
-          style={style}
+          className={btnClass}
           onClick={this.tooglePersonsHandler}>Switch Name</button>
         {persons}
       </div>
