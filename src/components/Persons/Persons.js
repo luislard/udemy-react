@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-export default class componentName extends Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
-}
+import Person from './Person/Person';
+
+const persons = (props) => props.persons.map( (person, index) => {
+  return <Person 
+      click={props.clicked.bind(props, index)}
+      name={person.name}
+      age={person.age} 
+      key={person.id}
+      changed={(event) => props.changed(event, person.id)} />
+});
+
+export default persons;
